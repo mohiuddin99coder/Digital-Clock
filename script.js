@@ -121,17 +121,23 @@ function set() {
     let minutes = input_minutes.value;
     let seconds = 0;
 
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
+    if (hours < 0 || minutes < 0) {
+        alert('Hours or Minutes should not be negative')
+        input_hours.value = "";
+        input_minutes.value = "";
+    } else if (hours != 0 || minutes != 0) {
+        btnStart.classList.remove('disabled');
+        btnSet.classList.add('disabled');
+        btnReset.classList.remove('disabled');
 
-    T_hrs.innerHTML = hours + "<div><span>Hours</span></div>"
-    T_mins.innerHTML = minutes + "<div><span>Minutes</span></div>";
-    T_secs.innerHTML = seconds + "<div><span>Seconds</span></div>";
-
-    btnSet.classList.add('disabled');
-    btnStart.classList.remove('disabled');
-    btnReset.classList.remove('disabled');
+        hours = hours < 10 ? '0' + hours : hours;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+    
+        T_hrs.innerHTML = hours + "<div><span>Hours</span></div>"
+        T_mins.innerHTML = minutes + "<div><span>Minutes</span></div>";
+        T_secs.innerHTML = seconds + "<div><span>Seconds</span></div>";
+    }
 }
 
 function start() {
